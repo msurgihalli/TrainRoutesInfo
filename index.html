@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Shortest Train Route</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.4.1/jasmine.css">
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <style>
+    .nodelabel,.edgelabel{
+      -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Chrome/Safari/Opera */
+      -khtml-user-select: none; /* Konqueror */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none;
+      pointer-events:none;
+    }
+
+    .edgelabel{
+      background-color: yellow;
+    }
+
+    #svg-space{
+      border: 1px solid #D1D1D1;
+      border-radius: 4px;
+    }
+
+    .edgepath:hover{
+      stroke: red;
+      pointer-events:all;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="" style="margin-top: 1%">
+        <h4>Train Route</h4>
+        <div class="row" style="display:none">
+            <label class="two columns"><input type="radio" value="directed" name="graph-type" checked="checked"><span class="label-body">Directed</span></input></label>
+            <label class="two columns"><input type="radio" value="undirected" name="graph-type"><span class="label-body">Undirected</span></input></label>
+        </div>
+        <div class="row"  style="display:none">
+            <label class="three columns"><input value="weighted" type="radio" name="edge-type" checked="checked"><span class="label-body">Weighted / Edge Labelled</span></input></label>
+            <label class="two columns"><input value="unweighted" type="radio" name="edge-type"><span class="label-body">Unweighted</span></input></label>
+        </div>
+        <div class="row">
+            <div class="two columns">
+                <label for="node-labels">City/Node Labels</label>
+                <div  id="label-format"></div>
+                <!-- <select class="u-full-width" id="label-format">
+                    <option value="numerals">1,2,3,...</option>
+                    <option value="alphabets">A,B,C,..</option>
+                    <option value="custom" selected>Custom Labels</option>
+                </select> -->
+                <textarea class="u-full-width" placeholder="One on each line" rows="12" id="node-labels" style="height:auto;"></textarea>
+            </div>
+            <div class="two columns">
+                <label for="data">Route Distance</label>
+                <!-- <div  id="graph-data-format"></div> -->
+                <select class="u-full-width" id="graph-data-format" style="display:none">
+                    <option value="adjmatrix">Adjacency Matrix</option>
+                    <option value="abw" selected>Node Weight</option>
+                </select>
+                <textarea class="u-full-width" placeholder="Comma separated square matrix, 0 means no edge" rows="12" id="graph-data" style="height:auto;"></textarea>
+            </div>
+            <div class="three columns">
+            <div class="row svgrow">
+              <svg style="border: 1px black solid;" id="svg-space" class="u-full-width"></svg>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <button id="create-graph" class="u-full-width button-primary">Create / Refresh</button>
+  </div>
+
+  <div class="row">
+      <div id="inputResults" class="four columns">
+     </div>
+      <div id="outputResults" class="four columns">
+      </div>
+</div>
+
+<div class="row">
+    <div class="one columns"></div>
+    <div id="1Results" class="four columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="2Results" class="four columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="3Results" class="four columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="4Results" class="four columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="5Results" class="four columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="6Results" class="six columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="7Results" class="six columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="8Results" class="nine columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="9Results" class="nine columns">
+   </div>
+</div>
+<div class="row">
+  <div class="one columns"></div>
+    <div id="10Results" class="nine columns">
+   </div>
+</div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+<script type="text/javascript" src="js/d3.v4.min.js"></script>
+<script type="text/javascript" src="js/Algorithm.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<br>
+<br>
+<br>
+</html>
