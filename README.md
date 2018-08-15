@@ -1,4 +1,6 @@
 # Train Routes
 
 
-Directed weighted with train routes and shortest route.
+1. Open index.html to use interactive tool prepopulated with the graph in the assignment.
+2. click create route to render the input graph, shortest path matrix and solutions to the assignment.
+3. Open testReport.html to run jasmine unit test case for all the assignment quesitons.
