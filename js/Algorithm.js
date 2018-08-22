@@ -257,12 +257,12 @@ function printAllPathsUtilExact4(nodes, graph, first, src, dest,  localPathList,
     return fullPath;
   }
 
-
+ var MAX_ROUTE_LENGTH = 30;
   function printAllPathsUtilDist50(nodes, graph, first, src, dest,  localPathList, fullPath) {
       if (src == dest){
           var newLocalPath = [first].concat(localPathList);
           var distance = distanceByAdjMatixPath(graph, newLocalPath);
-          if(distance<50){
+          if(distance < 50){
             var strVal =nodes[first].name;
             for(var k=0 ; k< localPathList.length ; k++){
               strVal += '->'+ nodes[localPathList[k]].name;
@@ -272,7 +272,8 @@ function printAllPathsUtilExact4(nodes, graph, first, src, dest,  localPathList,
       }
 
       for (var i = 0; i < graph[src].length; i += 1) {
-            if (graph[src][i] != NO_ROUTE && localPathList.length < 5) {
+            var currDistance = distanceByAdjMatixPath(graph, localPathList);
+            if (graph[src][i] != NO_ROUTE && currDistance < 50 && localPathList.length < MAX_ROUTE_LENGTH) {
                   localPathList.push(i);
                   printAllPathsUtilDist50(nodes, graph, first, i, dest,  localPathList, fullPath);
                   removeElementByVal(localPathList, i);
