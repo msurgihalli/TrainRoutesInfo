@@ -52,37 +52,40 @@ Algorithm.prototype.printAllResults = function(dataset, document){
 
   var shortestPathMat = this.shortestPathPair(this.createAdjMat(dataset));
    var _1Res = distanceByAdjMatixPath(shortestPathMat, [0,1,2]);
-   _1ResultsDiv.innerHTML =     "<div align='left'>  Distances of Route A-B-C ="+_1Res+"</div>" ;
+   _1ResultsDiv.innerHTML =     "<div align='left'> A. Distances of Route A-B-C ="+_1Res+"</div>" ;
 
    // var _2Res = this.findDistanceByPath('AD', dataset.nodes, shortestPathMat);
    var _2Res = distanceByAdjMatixPath(shortestPathMat, [0,3]);
-   _2ResultsDiv.innerHTML =     "<div align='left'>  Distances of Route A-D ="+_2Res+"</div>" ;
+   _2ResultsDiv.innerHTML =     "<div align='left'> B. Distances of Route A-D ="+_2Res+"</div>" ;
 
    var _3Res = distanceByAdjMatixPath(shortestPathMat, [0,3,2]);
-   _3ResultsDiv.innerHTML =     "<div align='left'>  Distances of Route A-D-C ="+_3Res+"</div>" ;
+   _3ResultsDiv.innerHTML =     "<div align='left'> C. Distances of Route A-D-C ="+_3Res+"</div>" ;
 
     var _4Res = distanceByAdjMatixPath(shortestPathMat, [0,4,1,2,3]);
-    _4ResultsDiv.innerHTML =     "<div align='left'>  Distances of Route A-E-B-C-D  ="+_4Res+"</div>" ;
+    _4ResultsDiv.innerHTML =     "<div align='left'> D. Distances of Route A-E-B-C-D  ="+_4Res+"</div>" ;
 
     var _5Res = distanceByAdjMatixPath(shortestPathMat, [0,4,3]);
-    _5ResultsDiv.innerHTML =     "<div align='left'>  Distances of Route A-E-D   ="+_5Res+"</div>" ;
+    _5ResultsDiv.innerHTML =     "<div align='left'> E. Distances of Route A-E-D   ="+_5Res+"</div>" ;
 
     // var _6Res = distanceByAdjMatixPath(shortestPathMat, [0,2]);
     var _6Res = this.findDistanceByPath('AC', dataset.nodes, shortestPathMat)
-    _6ResultsDiv.innerHTML =     "<div align='left'>  The length of the shortest route (in terms of distance to travel) from A to C  ="+_6Res+"</div>" ;
+    _6ResultsDiv.innerHTML =     "<div align='left'> F. The length of the shortest route (in terms of distance to travel) from A to C  ="+_6Res+"</div>" ;
 
     // var _7Res = distanceByAdjMatixPath(shortestPathMat, [1,1]);
     var _7Res = this.findDistanceByPath('BB', dataset.nodes, shortestPathMat)
-    _7ResultsDiv.innerHTML =     "<div align='left'>  The length of the shortest route (in terms of distance to travel) from B to B  ="+_7Res+"</div>" ;
+    _7ResultsDiv.innerHTML =     "<div align='left'> G. The length of the shortest route (in terms of distance to travel) from B to B  ="+_7Res+"</div>" ;
 
-    var _8Res = this.findAllPathMax3StopsById(dataset, 2, 2).toString();
-    _8ResultsDiv.innerHTML =     "<div align='left'>  The number of trips starting at C and ending at C with a maximum of 3 stops  ="+_8Res+"</div>" ;
+    var listMax3 = this.findAllPathMax3StopsById(dataset, 2, 2);
+    var _8Res = listMax3.length+"<br>  Routes  [  "+ listMax3.toString()+" ]";
+    _8ResultsDiv.innerHTML =     "<div align='left'> H. The number of trips starting at C and ending at C with a maximum of 3 stops  ="+_8Res+"</div>" ;
 
-    var _9Res = this.findAllPathExact4ById( dataset, 0, 2).toString();
-    _9ResultsDiv.innerHTML =     "<div align='left'>  The number of trips starting at A and ending at C with exactly 4 stops ="+_9Res+"</div>" ;
+    var listExact4 = this.findAllPathExact4ById( dataset, 0, 2);
+    var _9Res = listExact4.length+"<br>  Routes  [  "+ listExact4.toString()+" ]";
+    _9ResultsDiv.innerHTML =     "<div align='left'> I. The number of trips starting at A and ending at C with exactly 4 stops ="+_9Res+"</div>" ;
 
-    var _10Res = this.findAllPathLessThan50ById( dataset, 2, 2).toString();
-    _10ResultsDiv.innerHTML =     "<div align='left'>  The number of different routes from C to C with a distance of less than 50  ="+_10Res+"</div>" ;
+    var list50 = this.findAllPathLessThan50ById( dataset, 2, 2);
+    var _10Res = list50.length+"<br>  Routes  [  "+ list50.toString()+" ]";
+    _10ResultsDiv.innerHTML =     "<div align='left'> J. The number of different routes from C to C with a distance of less than 50  ="+_10Res+"</div>" ;
 }
 
 
